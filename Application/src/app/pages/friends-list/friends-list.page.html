@@ -1,0 +1,32 @@
+
+<ion-searchbar animated (ionChange)="searchChange()" (ionClear)="searchClear()" [(ngModel)]="searchText" placeholder="{{language.friends.search}}"></ion-searchbar>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngIf="isLoading">
+      <ion-label>
+        <ion-text>
+          <ion-skeleton-text width="200px"></ion-skeleton-text>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngFor="let friend of friends" [routerLink]="['/chat/' + friend.user_id]" [routerDirection]="forward" [detail]="true">
+      <ion-avatar slot="start">
+        <img [src]="friend.avatar">
+        <span class="status-indicator{{friend.offline ? ' status--offline': ' status--online'}}"></span>
+      </ion-avatar>
+      <ion-label>
+        <ion-text>
+          <h2>{{friend.name && friend.name.length > 1 ? friend.name: friend.username}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="(!friends || friends.length == 0) && !isLoading">
+      <ion-label>
+        <ion-text>
+          <h2>{{language.friends.noFriends}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

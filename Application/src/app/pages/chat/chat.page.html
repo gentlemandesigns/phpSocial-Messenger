@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/app/']">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" size="small" [routerLink]="['/user/details/' + userId ]">
+        <ion-avatar slot="start">
+          <img [src]="user.avatar ? user.avatar: ''">
+        </ion-avatar>
+        <ion-text text-capitalize *ngIf="user.name && user.name.length > 1">{{user.name}}</ion-text>
+        <ion-text text-lowercase *ngIf="!user.name || user.name.length == 1">{{user.username}}</ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" [routerLink]="['/user/details/' + userId ]">
+        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding #chatList>
+  <ion-list class="chat__list" lines="none">
+    <ion-item color="light" [button]="true" class="load-more-button" *ngIf="!listEnd" (click)="loadMore()">
+      <ion-label text-center>{{language.chat.loadMore}}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="isLoading" class="loader">
+      <ion-spinner name="dots"></ion-spinner>
+    </ion-item>
+    <ion-item *ngFor="let conv of chat; index as i">
+      <div class="chat__list__item">
+        <h3 *ngIf="(chat[i-1] ? older(chat[i-1].time, conv.time) : false)" class="chat__list__divider">{{conv.time | date}}</h3>
+        <app-chatbubble [message]="conv" position="{{(conv.user_id == (auth.getUser()).id)? 'right': 'left'}}"></app-chatbubble>
+      </div>
+    </ion-item>
+    <ion-item *ngIf="!chat || chat.length == 0">
+      <ion-label>
+        <ion-text>
+          <h2>{{language.chat.noMessages}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="sendingMessage">
+      <ion-label>
+        <ion-text>
+          <h2>{{language.chat.sending}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="chat__form">
+      <div [class]="'chat__form__icons' + (inputFocused === true? ' chat__form__icons--hide': '')" *ngIf="!user.blocked">
+        <ion-button fill="clear" size="small" (click)="captureImage()" [disabled]="user.blocked">
+          <ion-icon slot="icon-only" name="camera"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" size="small" (click)="pickImage()" [disabled]="user.blocked">
+          <ion-icon slot="icon-only" name="image"></ion-icon>
+        </ion-button>
+      </div>
+      <ion-textarea placeholder="{{user.blocked ? language.chat.userBlocked: language.chat.sendTextField}}" class="chat__form__textarea" rows="1" [(ngModel)]="message.message" (ionFocus)="focusInput()" (ionBlur)="blurInput()" [disabled]="user.blocked"></ion-textarea>
+      <div class="chat__form__icons" *ngIf="!user.blocked">
+        <ion-button fill="clear" size="small" [disabled]="!message.message && message.message.length == 0" (click)="sendMessage()">
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

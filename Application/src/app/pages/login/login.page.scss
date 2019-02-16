@@ -1,0 +1,26 @@
+#logo {
+  max-width: 50%;
+  max-height: 100px
+}
+
+.page.page-login {
+  background: url(../../../assets/background.jpg);
+  
+  --ion-item-background-color: transparent;
+}
+
+.input-rounded {
+  margin-bottom: 8px;
+}
+
+.middle-alignment {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

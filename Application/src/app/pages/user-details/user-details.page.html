@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-text text-capitalize>{{user.name && user.name.length > 1 ? user.name: user.username}}</ion-text>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="user">
+    <div class="user__cover" *ngIf="user.cover" [ngStyle]="{'background-image': 'url(' + user.cover + ')'}" (click)="showCover()"></div>
+    <div class="user__header">
+      <div class="user__header__avatar" *ngIf="user.avatar" (click)="showPhoto()">
+        <img [src]="user.avatar" [alt]="user.username">
+      </div>
+      <h3 class="user__header__name" *ngIf="user.name && user.name.length > 1">{{user.name}}</h3>
+      <h4 class="user__header__username" *ngIf="user.username && user.username.length > 1">@{{user.username}}</h4>
+      <ion-button round color="danger" *ngIf="!user.blocked" (click)="blockUser()">{{language.userDetails.blockButton}}</ion-button>
+    </div>
+  </div>
+
+
+  <div *ngIf="user.blocked" text-center color="danger">{{language.userDetails.userBlocked}}</div>
+
+  <ion-list class="user-details" *ngIf="!user.blocked">
+    <ion-item-divider *ngIf="user.bio">
+      <ion-label>
+        {{language.userDetails.bio}}
+      </ion-label>
+    </ion-item-divider>
+    <ion-item *ngIf="user.bio">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="quote"></ion-icon><ion-text>{{user.bio}}</ion-text>
+      </ion-label>
+    </ion-item>
+    
+    <ion-item-divider *ngIf="user.gender || user.born || user.interests">
+      <ion-label>
+        {{language.userDetails.basicInformation}}
+      </ion-label>
+    </ion-item-divider>
+    <ion-item *ngIf="user.gender">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="{{user.gender == 1? 'male': 'female'}}"></ion-icon> <ion-text><strong>{{language.userDetails.genderLabel}}</strong> {{user.gender == 1? language.userDetails.genders.male: language.userDetails.genders.female}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.born">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="school"></ion-icon> <ion-text><strong>{{language.userDetails.birthLabel}}</strong> {{user.born | date}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.interests">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="{{user.interests == 1? 'Male': 'Female'}}"></ion-icon> <ion-text><strong>{{language.userDetails.interestsLabel}}</strong>  {{user.interests == 1? language.userDetails.genders.male: language.userDetails.genders.female}}</ion-text>
+      </ion-label>
+    </ion-item>
+
+    
+    <ion-item-divider>
+      <ion-label>
+        {{language.userDetails.contact}}
+      </ion-label>
+    </ion-item-divider>
+    <ion-item *ngIf="user.email">
+      <ion-label>
+        <ion-icon slot="icon-only" name="mail"></ion-icon> <ion-text>{{user.email}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.country">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="globe"></ion-icon> <ion-text><strong>{{language.userDetails.countryLabel}}</strong> {{user.country}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.location">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="pin"></ion-icon> <ion-text><strong>{{language.userDetails.cityLabel}}</strong> {{user.location}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.address">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="compass"></ion-icon> <ion-text><strong>{{language.userDetails.addressLabel}}</strong> {{user.address}}</ion-text>
+      </ion-label>
+    </ion-item>
+
+    
+    <ion-item-divider *ngIf="user.work || user.school">
+      <ion-label>
+        {{language.userDetails.workEducation}}
+      </ion-label>
+    </ion-item-divider>
+    <ion-item *ngIf="user.work">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="briefcase"></ion-icon> <ion-text><strong>{{language.userDetails.workLabel}}</strong> {{user.work}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.school">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="school"></ion-icon> <ion-text><strong>{{language.userDetails.educationLabel}}</strong> {{user.school}}</ion-text>
+      </ion-label>
+    </ion-item>
+
+    
+    <ion-item-divider *ngIf="user.facebook || user.gplus || user.twitter">
+      <ion-label>
+        {{language.userDetails.social}}
+      </ion-label>
+    </ion-item-divider>
+    <ion-item *ngIf="user.facebook">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="logo-facebook"></ion-icon> <ion-text><strong>{{language.userDetails.facebookLabel}}</strong> {{user.facebook}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.gplus">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon> <ion-text><strong>{{language.userDetails.twitterLabel}}</strong> {{user.gplus}}</ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="user.twitter">
+      <ion-label text-wrap>
+        <ion-icon slot="icon-only" name="logo-twitter"></ion-icon> <ion-text><strong>{{language.userDetails.googlePlusLabel}}</strong> {{user.twitter}}</ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,31 @@
+<div class="user">
+  <div class="user__cover" *ngIf="this.auth.user.cover" [ngStyle]="{'background-image': 'url(' + this.auth.user.cover + ')'}" (click)="showCover()"></div>
+  <div class="user__header">
+    <div class="user__header__avatar" *ngIf="this.auth.user.avatar" (click)="showPhoto()">
+      <img [src]="this.auth.user.avatar" [alt]="this.auth.user.username">
+    </div>
+    <h3 class="user__header__name" *ngIf="this.auth.user.name && this.auth.user.name.length > 1">{{this.auth.user.name}}</h3>
+    <h4 class="user__header__username" *ngIf="this.auth.user.username && this.auth.user.username.length > 1">@{{this.auth.user.username}}</h4>
+  </div>
+</div>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>
+        {{language.settings.pageName}}
+      </ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{language.settings.notificationsItem}}</ion-label>
+      <ion-toggle slot="end" [checked]="(this.auth.getSettings()).notifications" [(ngModel)]="settings.notifications" (ionChange)="toggleNotifications()"></ion-toggle>
+    </ion-item>
+    <ion-item button (click)="this.auth.logout()" [detail]="true">
+      <ion-label>
+        <ion-icon slot="icon-only" name="log-out" color="danger" class="button-log-out"></ion-icon><ion-text color="danger">{{language.settings.logoutItem}}</ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

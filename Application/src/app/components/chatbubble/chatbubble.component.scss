@@ -1,0 +1,64 @@
+
+
+.chatbubble {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+
+  &__message {
+    display: block;
+    position: relative;
+    text-align: left;
+    background: #eee;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 50%;
+    overflow: hidden;
+
+    &--picture {
+      padding: 0;
+    }
+
+    &__content {
+      display: inline-block;
+    }
+
+    &__image {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      vertical-align: top;
+    }
+  }
+  &__time {
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    color: #555;
+    padding: 3px 0 0 0;
+    position: relative;
+    overflow: hidden;
+    height: 0;
+
+    transition: all .5s;
+
+    &--visible {
+      height: auto;
+    }
+  }
+
+  &--receive {
+    align-items: flex-start;
+
+    .chatbubble__message {
+      border-radius: 10px 10px 10px 0;
+    }
+  }
+  &--send {
+    align-items: flex-end;
+
+    .chatbubble__message {
+      border-radius: 10px 10px 0 10px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<ion-content
+  padding 
+  class="page page-login" 
+  align-items-center
+  scroll-enabled="false"
+>
+  <ion-grid class="middle-alignment">
+    <ion-row justify-content-center text-center>
+      <ion-col>
+        <img src="../../assets/logo.svg" alt="Logo" id="logo" />
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col>
+        <div class="alert alert--error" *ngIf="error">{{error}}</div>
+        <form id="loginForm" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+          <ion-input required type="text" placeholder="{{language.login.inputUsername}}" class="input-rounded" name="username" [(ngModel)]="username"></ion-input>
+          <ion-input required type="password" placeholder="{{language.login.inputPassword}}" class="input-rounded" name="password" [(ngModel)]="password"></ion-input>
+          <ion-button type="submit" round color="primary" expand="full" class="button-login"><span *ngIf="this.loading"><ion-spinner name="bubbles"></ion-spinner></span><span *ngIf="!this.loading">{{language.login.button}}</span></ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

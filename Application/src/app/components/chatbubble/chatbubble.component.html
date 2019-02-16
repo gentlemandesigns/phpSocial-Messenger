@@ -1,0 +1,10 @@
+<div [class]="( position == 'left' )? 'chatbubble chatbubble--receive': 'chatbubble chatbubble--send'" (click)="toggleTime()">
+  <div [class]="message.message_type == 'picture' ? 'chatbubble__message chatbubble__message--picture': 'chatbubble__message'">
+    <img [src]="message.message_value" *ngIf="message.message_type == 'image'">
+    <div *ngIf="message.message_type != 'picture'" class="chatbubble__message__content">{{message.message}}</div>
+    <div *ngIf="message.message_type == 'picture'" class="chatbubble__message__content" (click)="showPhoto()">
+      <img [src]="message.message_thumbnail ? message.message_thumbnail: message.message_value" class="chatbubble__message__image">
+    </div>
+  </div>
+  <div [class]="( timeVisible )? 'chatbubble__time chatbubble__time--visible': 'chatbubble__time chatbubble__time--hidden'">{{message.time}}</div>
+</div>

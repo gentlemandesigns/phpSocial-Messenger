@@ -1,0 +1,36 @@
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngIf="isLoading">
+      <ion-label>
+        <ion-text>
+          <ion-skeleton-text width="200px"></ion-skeleton-text>
+          <ion-skeleton-text width="100px"></ion-skeleton-text>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+    <ion-item-sliding *ngFor="let conversation of conversations">
+      <ion-item [routerLink]="['/chat/' + conversation.user_id]" [routerDirection]="forward" [detail]="true">
+        <ion-avatar slot="start">
+          <img [src]="conversation.avatar">
+          <span class="status-indicator{{conversation.offline ? ' status--offline': ' status--online'}}"></span>
+        </ion-avatar>
+        <ion-label [class]="conversation.message_read == 0? 'text-bold': ''">
+          <ion-text>
+            <h2 [class]="conversation.message_read == 0? 'text-bold': ''">{{conversation.name && conversation.name.length > 1 ? conversation.name: conversation.username}}</h2>
+          </ion-text>
+          <p class="conversations-note">{{conversation.message}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="readChat(conversation)" color="light">{{language.conversations.readMessage}}</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item *ngIf="(!conversations || conversations.length == 0) && !isLoading">
+      <ion-label>
+        <ion-text>
+          <h2>{{language.conversations.noConversations}}</h2>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
