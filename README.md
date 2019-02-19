@@ -189,3 +189,8 @@ The compiled files should be found in: `\platforms\android\app\build\outputs\apk
 Download APK Signer for Windows: [https://shatter-box.com/download/apk-signer/](https://shatter-box.com/download/apk-signer/)
 Generate a keystore, sign the application and align it.
 **You are ready to o publish !**
+
+# Thank you:
+[![Browserstack logo](https://dl.dropbox.com/s/858mooc4sohnjr0/Browserstack-logo.png?dl=0)](https://www.browserstack.com)
+
+[![DigitalOcean logo](https://dl.dropbox.com/s/wvfkq0k7grh92p9/DO_Logo_Horizontal_Blue%20%282%29.png?dl=0)](https://m.do.co/c/0c2a156473a4)
