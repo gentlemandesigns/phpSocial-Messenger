@@ -7,10 +7,17 @@ Compatible with Android, [phpSocial](http://bit.ly/2Na83bV) Messenger offers nat
 **Login:** demo / demodemo 
 **Android demo:** [Download APK File](https://www.dropbox.com/s/nrw87sbn6w47v8p/phpsocial.apk?dl=1)
 
-### Requirements
+## Requirements
 -   Windows 8 or newer
 -   Minimal knowledge of JSON structure and XML.
 -   Time and focus on reading the instructions.
+
+## Screenshots
+More screenshots in the "Screenshots" folder
+
+![Conversations list](https://dl.dropbox.com/s/11oakn30b0t1qj4/03_conversations.png?dl=0)
+![Chat](https://dl.dropbox.com/s/4gnwybk4jby84ym/07_chat.png?dl=0)
+![Rich Notifications](https://dl.dropbox.com/s/hp0n6m473a0zcuj/12_rich_notifications.png?dl=0)
 
 # Installation
 ## First steps **[[Video Tutorial]](https://www.youtube.com/watch?v=e9tV18ulmXo)**
